@@ -70,8 +70,10 @@ void FtmSessionOver (FtmSession session);
 std::map<uint32_t, uint64_t> warmupFlows;
 
 FtmParams ftmParams;
-uint64_t ftmRequestsSent = 0;
-uint64_t ftmRequestsReceived = 0;
+uint64_t ftmReqSent = 0;
+uint64_t ftmReqRec = 0;
+uint64_t currentFtmReqSent = 0;
+uint64_t currentFtmReqRec = 0;
 
 double fuzzTime = 5.;
 double ftmIntervalTime = 0.1;
@@ -512,7 +514,7 @@ main (int argc, char *argv[])
 
   // Gather results in CSV format
   double velocity = mobilityModel == "RWPM" ? nodeSpeed : 0.;
-  double ftmSuccessRate = ftmRequestsReceived / (double) ftmRequestsSent;
+  double ftmSuccessRate = ftmReqRec / (double) ftmReqSent;
 
   std::ostringstream csvOutput;
   csvOutput << mobilityModel << ',' << velocity << ',' << distance << "," << nWifi << ',' << nWifiReal << ','
@@ -660,9 +662,14 @@ SetFtmParams ()
 {
   if (useMlAgent && Simulator::Now ().GetSeconds () >= fuzzTime)
     {
+      currentFtmReqSent = std::max (currentFtmReqSent, (uint64_t) 1);
+
       auto env = m_env->EnvSetterCond ();
-      env->ftmSuccessRate = ftmRequestsReceived / (double) ftmRequestsSent;
+      env->ftmSuccessRate = currentFtmReqRec / (double) currentFtmReqSent;
       m_env->SetCompleted ();
+
+      currentFtmReqSent = 0;
+      currentFtmReqRec = 0;
 
       auto act = m_env->ActionGetterCond ();
       ftmParams.SetNumberOfBurstsExponent (act->numberOfBurstsExponent);
@@ -695,7 +702,8 @@ FtmBurst (uint32_t staId, Ptr<WifiNetDevice> device, Mac48Address apAddress)
       session->SetSessionOverCallback (MakeCallback (&FtmSessionOver));
       session->SessionBegin ();
 
-      ftmRequestsSent++;
+      ftmReqSent++;
+      currentFtmReqSent++;
     }
 
   Simulator::Schedule (Seconds (ftmIntervalTime), &FtmBurst, staId, device, apAddress);
@@ -709,6 +717,7 @@ FtmSessionOver (FtmSession session)
   if (distance != 0 && distance < MAX_DISTANCE)
     {
       // FTM success
-      ftmRequestsReceived++;
+      ftmReqRec++;
+      currentFtmReqRec++;
     }
 }

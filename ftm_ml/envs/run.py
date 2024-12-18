@@ -18,7 +18,7 @@ if __name__ == '__main__':
     args.add_argument('--scenario', type=str, default='scenario')
 
     # ns-3 args
-    args.add_argument('--agentIntervalTime', type=float, default=1.0)
+    args.add_argument('--agentIntervalTime', type=float, default=5.0)
     args.add_argument('--csvPath', type=str, default='results.csv')
     args.add_argument('--dataRate', type=int, default=120)
     args.add_argument('--ftmIntervalTime', type=float, default=0.1)
