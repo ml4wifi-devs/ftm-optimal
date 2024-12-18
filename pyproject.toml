@@ -13,9 +13,9 @@ authors = [
   {name = "Katarzyna Kosek-Szott", email = "katarzyna.kosek-szott@agh.edu.pl"}
 ]
 
-requires-python = ">=3.12"
+requires-python = ">=3.9"
 dependencies = [
-  "jax~=0.4.37",
+  "jax~=0.4.30",
   "reinforced-lib==1.1.4",
 ]
 

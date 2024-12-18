@@ -26,6 +26,29 @@ using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE ("ftm-ml");
 
+/*** ns3-ai structures definitions ***/
+
+#define DEFAULT_MEMBLOCK_KEY 2333
+
+struct sEnv
+{
+  double ftmSuccessRate;
+} Packed;
+
+struct sAct
+{
+  uint8_t numberOfBurstsExponent;
+  uint8_t burstDuration;
+  uint8_t minDeltaFtm;
+  uint16_t partialTsfTimer;
+  bool partialTsfNoPref;
+  bool asap;
+  uint8_t ftmsPerBurst;
+  uint16_t burstPeriod;
+} Packed;
+
+Ns3AIRL<sEnv, sAct> * m_env;
+
 /***** Functions declarations *****/
 
 void ChangePower (Ptr<Node> staNode, uint8_t powerLevel);
@@ -34,6 +57,7 @@ void InstallTrafficGenerator (Ptr<ns3::Node> fromNode, Ptr<ns3::Node> toNode, ui
                               DataRate offeredLoad, uint32_t packetSize, double startTime, double stopTime);
 void PopulateArpCache ();
 void SetPosition (Ptr<MobilityModel> mobilityModel, Vector3D pos);
+void SetFtmParams ();
 void FtmBurst (uint32_t staId, Ptr <WifiNetDevice> device, Mac48Address apAddress);
 void FtmSessionOver (FtmSession session);
 
@@ -45,11 +69,17 @@ void FtmSessionOver (FtmSession session);
 
 std::map<uint32_t, uint64_t> warmupFlows;
 
+FtmParams ftmParams;
+uint64_t ftmRequestsSent = 0;
+uint64_t ftmRequestsReceived = 0;
+
 double fuzzTime = 5.;
 double ftmIntervalTime = 0.1;
+double agentIntervalTime = 1.0;
 double warmupTime = 10.;
 double simulationTime = 50.;
 bool hiddenCrossScenario = false;
+bool useMlAgent = false;
 
 /***** Main with scenario definition *****/
 
@@ -59,7 +89,7 @@ main (int argc, char *argv[])
   // Initialize default simulation parameters
   std::string csvPath = "results.csv";
   std::string ftmMapPath = "";
-  std::string lossModel = "Nakagami";
+  std::string lossModel = "LogDistance";
   std::string mobilityModel = "Distance";
   std::string pcapName = "";
 
@@ -71,7 +101,7 @@ main (int argc, char *argv[])
   bool ampdu = true;
   bool enableRtsCts = false;
   uint32_t packetSize = 1500;
-  uint32_t dataRate = 125;
+  uint32_t dataRate = 120;
   uint32_t channelWidth = 20;
   uint32_t minGI = 3200;
 
@@ -79,8 +109,18 @@ main (int argc, char *argv[])
   double nodeSpeed = 1.4;
   double nodePause = 20.;
 
+  ftmParams.SetNumberOfBurstsExponent(1);
+  ftmParams.SetBurstDuration(6);
+  ftmParams.SetMinDeltaFtm(4);
+  ftmParams.SetPartialTsfTimer(0);
+  ftmParams.SetPartialTsfNoPref(true);
+  ftmParams.SetAsap(true);
+  ftmParams.SetFtmsPerBurst(2);
+  ftmParams.SetBurstPeriod(2);
+
   // Parse command line arguments
   CommandLine cmd;
+  cmd.AddValue ("agentIntervalTime", "Interval between agent actions (s)", agentIntervalTime);
   cmd.AddValue ("ampdu", "Use AMPDU (boolean flag)", ampdu);
   cmd.AddValue ("area", "Size of the square in which stations are wandering (m) - only for RWPM mobility type", area);
   cmd.AddValue ("channelWidth", "Channel width (MHz)", channelWidth);
@@ -103,6 +143,7 @@ main (int argc, char *argv[])
   cmd.AddValue ("packetSize", "Packets size (B)", packetSize);
   cmd.AddValue ("pcapName", "Name of a PCAP file generated from the AP", pcapName);
   cmd.AddValue ("simulationTime", "Duration of simulation (s)", simulationTime);
+  cmd.AddValue ("useMlAgent", "Flag set to use ML agent", useMlAgent);
   cmd.AddValue ("warmupTime", "Duration of warmup stage (s)", warmupTime);
   cmd.Parse (argc, argv);
 
@@ -402,6 +443,9 @@ main (int argc, char *argv[])
                            Mac48Address::ConvertFrom (apDevice.Get (0)->GetAddress ()));
     }
 
+  // Setup interactions with ML agent
+  Simulator::Schedule (Seconds (warmupTime), &SetFtmParams);
+
   // Define simulation stop time
   Simulator::Stop (Seconds (warmupTime + simulationTime));
 
@@ -410,6 +454,12 @@ main (int argc, char *argv[])
   auto start = std::chrono::high_resolution_clock::now ();
 
   // Run the simulation!
+  if (useMlAgent)
+    {
+      m_env = new Ns3AIRL<sEnv, sAct> (DEFAULT_MEMBLOCK_KEY);
+      m_env->SetCond (2, 0);
+    }
+
   Simulator::Run ();
 
   // Record stop time and count duration
@@ -462,13 +512,14 @@ main (int argc, char *argv[])
 
   // Gather results in CSV format
   double velocity = mobilityModel == "RWPM" ? nodeSpeed : 0.;
+  double ftmSuccessRate = ftmRequestsReceived / (double) ftmRequestsSent;
 
   std::ostringstream csvOutput;
-  csvOutput << mobilityModel << ',' << velocity << ',' << distance << ",," << nWifi << ','
-            << nWifiReal << ',' << RngSeedManager::GetRun () << ',' << totalThr << std::endl;
+  csvOutput << mobilityModel << ',' << velocity << ',' << distance << "," << nWifi << ',' << nWifiReal << ','
+            << RngSeedManager::GetRun () << ',' << totalThr << ',' << ftmSuccessRate << std::endl;
 
   // Print results to std output
-  std::cout << "mobility,velocity,distance,time,nWifi,nWifiReal,seed,throughput"
+  std::cout << "mobility,velocity,distance,nWifi,nWifiReal,seed,throughput,ftmSuccessRate"
             << std::endl
             << csvOutput.str ();
 
@@ -479,6 +530,11 @@ main (int argc, char *argv[])
 
   //Clean-up
   Simulator::Destroy ();
+
+  if (useMlAgent)
+    {
+      m_env->SetFinish ();
+    }
 
   return 0;
 }
@@ -600,14 +656,34 @@ SetPosition (Ptr<MobilityModel> mobilityModel, Vector3D pos)
 }
 
 void
+SetFtmParams ()
+{
+  if (useMlAgent && Simulator::Now ().GetSeconds () >= fuzzTime)
+    {
+      auto env = m_env->EnvSetterCond ();
+      env->ftmSuccessRate = ftmRequestsReceived / (double) ftmRequestsSent;
+      m_env->SetCompleted ();
+
+      auto act = m_env->ActionGetterCond ();
+      ftmParams.SetNumberOfBurstsExponent (act->numberOfBurstsExponent);
+      ftmParams.SetBurstDuration (act->burstDuration);
+      ftmParams.SetMinDeltaFtm (act->minDeltaFtm);
+      ftmParams.SetPartialTsfTimer (act->partialTsfTimer);
+      ftmParams.SetPartialTsfNoPref (act->partialTsfNoPref);
+      ftmParams.SetAsap (act->asap);
+      ftmParams.SetFtmsPerBurst (act->ftmsPerBurst);
+      ftmParams.SetBurstPeriod (act->burstPeriod);
+      m_env->GetCompleted ();
+
+      Simulator::Schedule (Seconds (agentIntervalTime), &SetFtmParams);
+    }
+}
+
+void
 FtmBurst (uint32_t staId, Ptr<WifiNetDevice> device, Mac48Address apAddress)
 {
   Ptr<RegularWifiMac> staMac = device->GetMac ()->GetObject<RegularWifiMac> ();
   Ptr<FtmSession> session = staMac->NewFtmSession (apAddress);
-
-  // Set FTM parameters
-  // FtmParams ftmParams;
-  // session->SetFtmParams(ftmParams);
 
   if (session != NULL)
     {
@@ -615,8 +691,11 @@ FtmBurst (uint32_t staId, Ptr<WifiNetDevice> device, Mac48Address apAddress)
       errorModel->SetNode (device->GetNode ());
 
       session->SetFtmErrorModel (errorModel);
+      session->SetFtmParams(ftmParams);
       session->SetSessionOverCallback (MakeCallback (&FtmSessionOver));
       session->SessionBegin ();
+
+      ftmRequestsSent++;
     }
 
   Simulator::Schedule (Seconds (ftmIntervalTime), &FtmBurst, staId, device, apAddress);
@@ -630,5 +709,6 @@ FtmSessionOver (FtmSession session)
   if (distance != 0 && distance < MAX_DISTANCE)
     {
       // FTM success
+      ftmRequestsReceived++;
     }
 }
