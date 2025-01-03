@@ -41,27 +41,3 @@ The wifi-ftm-ns3 extension of the ns-3 network simulator needs to be installed o
 	./waf configure -d optimized --enable-examples --enable-tests --disable-werror --disable-python
 	./waf
 	```
-
-### ns3-ai
-
-The ns3-ai module interconnects ns-3 and Python by transferring data through a shared memory pool. 
-The memory can be accessed by both sides, thus making the connection. Read more about ns3-ai at the
-[official repository](https://github.com/hust-diangroup/ns3-ai).
-
-1.  Clone our fork of ns3-ai into `contrib` directory
-	```
-	cd $NS3_DIR/contrib/
-	git clone https://github.com/m-wojnar/ns3-ai.git
-	```
-2. Go to ns3-ai directory and install the ns3-ai Python interface:
-	```
-	cd "$NS3_DIR/contrib/ns3-ai/"
-	pip install py_interface
-	```
-3. Rebuild ns-3:
-	```
-	cd $NS3_DIR
-	./waf configure -d optimized --enable-examples --enable-tests --disable-werror --disable-python
-	./waf
-	```
- 

@@ -1,25 +1,37 @@
-import os
-os.environ['JAX_ENABLE_X64'] = 'True'
-
 import argparse
+import os
+from functools import partial
 
-from py_interface import *
+import optuna
 
-from ftm_ml.envs.ns3_ai_structures import *
+
+def objective(trial, ns3_path, scenario, ns3_args):
+    ftm_params = {
+        'ftmNumberOfBurstsExponent': trial.suggest_int('ftmNumberOfBurstsExponent', 1, 4),
+        'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 11),
+        'ftmMinDeltaFtm': trial.suggest_int('ftmMinDeltaFtm', 1, 26),
+        'ftmPartialTsfTimer': 2 ** trial.suggest_int('ftmPartialTsfTimer', 1, 16) - 1,
+        'ftmPartialTsfNoPref': trial.suggest_categorical('ftmPartialTsfNoPref', [True, False]),
+        'ftmAsap': trial.suggest_categorical('ftmAsap', [True, False]),
+        'ftmFtmsPerBurst': trial.suggest_int('ftmFtmsPerBurst', 1, 8),
+        'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 1, 20)
+    }
+    run_args = {**ns3_args, **ftm_params}
+
+    return None
 
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
     # global settings
+    args.add_argument('--database', type=str, default='sqlite:///optuna.db')
     args.add_argument('--seed', type=int, default=100)
-    args.add_argument('--mempoolKey', type=int, default=1234)
-    args.add_argument('--ns3Path', type=str, default='')
+    args.add_argument('--ns3_path', type=str, default='')
+    args.add_argument('--n_trials', type=int, default=200)
     args.add_argument('--scenario', type=str, default='scenario')
 
     # ns-3 args
-    args.add_argument('--agentIntervalTime', type=float, default=5.0)
-    args.add_argument('--csvPath', type=str, default='results.csv')
     args.add_argument('--dataRate', type=int, default=120)
     args.add_argument('--ftmIntervalTime', type=float, default=0.1)
     args.add_argument('--fuzzTime', type=float, default=5.0)
@@ -31,44 +43,30 @@ if __name__ == '__main__':
     args = vars(args)
 
     # read the arguments
-    ns3_path = args.pop('ns3Path')
+    ns3_path = args.pop('ns3_path')
 
     if os.environ.get('NS3_DIR'):
         ns3_path = os.environ['NS3_DIR']
     if not ns3_path:
         raise ValueError('ns-3 path not found')
 
-    mempool_key = args.pop('mempoolKey')
     scenario = args.pop('scenario')
     seed = args.pop('seed')
 
     ns3_args = args
     ns3_args['RngRun'] = seed
-    ns3_args['useMlAgent'] = True
 
-    # set up the environment
-    exp = Experiment(mempool_key, MEM_SIZE, scenario, ns3_path)
-    var = Ns3AIRL(MEMBLOCK_KEY, Env, Act)
+    study = optuna.create_study(
+        storage=args['database'],
+        study_name='ftm-ml',
+        load_if_exists=True,
+        direction='maximize',
+        sampler=optuna.samplers.TPESampler(seed=seed)
+    )
 
-    try:
-        # run the experiment
-        ns3_process = exp.run(setting=ns3_args, show_output=True)
-        action = None
-
-        while not var.isFinish():
-            with var as data:
-                if data is None:
-                    break
-
-                data.act.numberOfBurstExponent = 1
-                data.act.burstDuration = 6
-                data.act.minDeltaFtm = 4
-                data.act.partialTsfTimer = 0
-                data.act.partialTsfNoPref = True
-                data.act.asap = True
-                data.act.ftmsPerBurst = 2
-                data.act.burstPeriod = 2
-
-        ns3_process.wait()
-    finally:
-        del exp
+    study.optimize(
+        partial(objective, ns3_path=ns3_path, scenario=scenario, ns3_args=ns3_args),
+        n_trials=args['n_trials'],
+        n_jobs=-1,
+        show_progress_bar=True
+    )

@@ -1,5 +1,4 @@
 #include <chrono>
-#include <filesystem>
 #include <map>
 #include <string>
 
@@ -16,38 +15,13 @@
 #include "ns3/mobility-model.h"
 #include "ns3/node-container.h"
 #include "ns3/node-list.h"
-#include "ns3/ns3-ai-module.h"
 #include "ns3/ssid.h"
 #include "ns3/wifi-net-device.h"
-#include "ns3/wifi-utils.h"
 #include "ns3/yans-wifi-helper.h"
 
 using namespace ns3;
 
 NS_LOG_COMPONENT_DEFINE ("ftm-ml");
-
-/*** ns3-ai structures definitions ***/
-
-#define DEFAULT_MEMBLOCK_KEY 2333
-
-struct sEnv
-{
-  double ftmSuccessRate;
-} Packed;
-
-struct sAct
-{
-  uint8_t numberOfBurstsExponent;
-  uint8_t burstDuration;
-  uint8_t minDeltaFtm;
-  uint16_t partialTsfTimer;
-  bool partialTsfNoPref;
-  bool asap;
-  uint8_t ftmsPerBurst;
-  uint16_t burstPeriod;
-} Packed;
-
-Ns3AIRL<sEnv, sAct> * m_env;
 
 /***** Functions declarations *****/
 
@@ -69,11 +43,8 @@ void FtmSessionOver (FtmSession session);
 
 std::map<uint32_t, uint64_t> warmupFlows;
 
-FtmParams ftmParams;
 uint64_t ftmReqSent = 0;
 uint64_t ftmReqRec = 0;
-uint64_t currentFtmReqSent = 0;
-uint64_t currentFtmReqRec = 0;
 
 double fuzzTime = 5.;
 double ftmIntervalTime = 0.1;
@@ -81,7 +52,6 @@ double agentIntervalTime = 1.0;
 double warmupTime = 10.;
 double simulationTime = 50.;
 bool hiddenCrossScenario = false;
-bool useMlAgent = false;
 
 /***** Main with scenario definition *****/
 
@@ -111,14 +81,14 @@ main (int argc, char *argv[])
   double nodeSpeed = 1.4;
   double nodePause = 20.;
 
-  ftmParams.SetNumberOfBurstsExponent(1);
-  ftmParams.SetBurstDuration(6);
-  ftmParams.SetMinDeltaFtm(4);
-  ftmParams.SetPartialTsfTimer(0);
-  ftmParams.SetPartialTsfNoPref(true);
-  ftmParams.SetAsap(true);
-  ftmParams.SetFtmsPerBurst(2);
-  ftmParams.SetBurstPeriod(2);
+  uint8_t ftmNumberOfBurstsExponent = 1;
+  uint8_t ftmBurstDuration = 6;
+  uint8_t ftmMinDeltaFtm = 4;
+  uint16_t ftmPartialTsfTimer = 0;
+  bool ftmPartialTsfNoPref = true;
+  bool ftmAsap = true;
+  uint8_t ftmFtmsPerBurst = 2;
+  uint16_t ftmBurstPeriod = 2;
 
   // Parse command line arguments
   CommandLine cmd;
@@ -133,6 +103,14 @@ main (int argc, char *argv[])
   cmd.AddValue ("enableRtsCts", "Flag set to enable CTS/RTS protocol", enableRtsCts);
   cmd.AddValue ("ftmIntervalTime", "Interval between FTM bursts (s)", ftmIntervalTime);
   cmd.AddValue ("ftmMap", "Path to FTM wireless error map", ftmMapPath);
+  cmd.AddValue ("ftmNumberOfBurstsExponent", "Number of bursts exponent", ftmNumberOfBurstsExponent);
+  cmd.AddValue ("ftmBurstDuration", "Burst duration", ftmBurstDuration);
+  cmd.AddValue ("ftmMinDeltaFtm", "Minimum delta FTM", ftmMinDeltaFtm);
+  cmd.AddValue ("ftmPartialTsfTimer", "Partial TSF timer", ftmPartialTsfTimer);
+  cmd.AddValue ("ftmPartialTsfNoPref", "Partial TSF no preference", ftmPartialTsfNoPref);
+  cmd.AddValue ("ftmAsap", "ASAP capable", ftmAsap);
+  cmd.AddValue ("ftmFtmsPerBurst", "FTMs per burst", ftmFtmsPerBurst);
+  cmd.AddValue ("ftmBurstPeriod", "Burst period", ftmBurstPeriod);
   cmd.AddValue ("fuzzTime", "Maximum fuzz value (s)", fuzzTime);
   cmd.AddValue ("hiddenCrossScenario", "Flag set to enable hidden cross scenario", hiddenCrossScenario);
   cmd.AddValue ("powerInterval", "Interval between power change (s)", powerInterval);
@@ -145,7 +123,6 @@ main (int argc, char *argv[])
   cmd.AddValue ("packetSize", "Packets size (B)", packetSize);
   cmd.AddValue ("pcapName", "Name of a PCAP file generated from the AP", pcapName);
   cmd.AddValue ("simulationTime", "Duration of simulation (s)", simulationTime);
-  cmd.AddValue ("useMlAgent", "Flag set to use ML agent", useMlAgent);
   cmd.AddValue ("warmupTime", "Duration of warmup stage (s)", warmupTime);
   cmd.Parse (argc, argv);
 
@@ -153,6 +130,16 @@ main (int argc, char *argv[])
     {
       nWifi = hiddenCrossScenario ? 4 * nWifi : 2 * nWifi;
     }
+
+  FtmParams ftmParams;
+  ftmParams.SetNumberOfBurstsExponent(ftmNumberOfBurstsExponent);
+  ftmParams.SetBurstDuration(ftmBurstDuration);
+  ftmParams.SetMinDeltaFtm(ftmMinDeltaFtm);
+  ftmParams.SetPartialTsfTimer(ftmPartialTsfTimer);
+  ftmParams.SetPartialTsfNoPref(ftmPartialTsfNoPref);
+  ftmParams.SetAsap(ftmAsap);
+  ftmParams.SetFtmsPerBurst(ftmFtmsPerBurst);
+  ftmParams.SetBurstPeriod(ftmBurstPeriod);
 
   // Print simulation settings to screen
   std::cout << std::endl
@@ -189,6 +176,17 @@ main (int argc, char *argv[])
                 << std::endl;
     }
 
+  std::cout << "FTM parameters:" << std::endl
+            << "- number of bursts exponent: " << (uint32_t) ftmNumberOfBurstsExponent << std::endl
+            << "- burst duration: " << (uint32_t) ftmBurstDuration << std::endl
+            << "- minimum delta FTM: " << (uint32_t) ftmMinDeltaFtm << std::endl
+            << "- partial TSF timer: " << (uint32_t) ftmPartialTsfTimer << std::endl
+            << "- partial TSF no preference: " << ftmPartialTsfNoPref << std::endl
+            << "- ASAP capable: " << ftmAsap << std::endl
+            << "- FTMs per burst: " << (uint32_t) ftmFtmsPerBurst << std::endl
+            << "- burst period: " << ftmBurstPeriod << std::endl
+            << std::endl;
+
   // Load FTM map and configure FTM
   if (!ftmMapPath.empty ())
     {
@@ -196,6 +194,10 @@ main (int argc, char *argv[])
       ftmMap->LoadMap (ftmMapPath);
       Config::SetDefault ("ns3::WirelessFtmErrorModel::FtmMap", PointerValue (ftmMap));
     }
+
+  Ptr<FtmParamsHolder> ftmParamsHolder = CreateObject<FtmParamsHolder> ();
+  ftmParamsHolder->SetFtmParams (ftmParams);
+  Config::SetDefault ("ns3::FtmSession::DefaultFtmParams", PointerValue (ftmParamsHolder));
 
   Time::SetResolution (Time::PS);
   Config::SetDefault ("ns3::RegularWifiMac::QosSupported", BooleanValue (true));
@@ -445,22 +447,12 @@ main (int argc, char *argv[])
                            Mac48Address::ConvertFrom (apDevice.Get (0)->GetAddress ()));
     }
 
-  // Setup interactions with ML agent
-  Simulator::Schedule (Seconds (warmupTime), &SetFtmParams);
-
   // Define simulation stop time
   Simulator::Stop (Seconds (warmupTime + simulationTime));
 
   // Record start time
   std::cout << "Starting simulation..." << std::endl;
   auto start = std::chrono::high_resolution_clock::now ();
-
-  // Run the simulation!
-  if (useMlAgent)
-    {
-      m_env = new Ns3AIRL<sEnv, sAct> (DEFAULT_MEMBLOCK_KEY);
-      m_env->SetCond (2, 0);
-    }
 
   Simulator::Run ();
 
@@ -532,11 +524,6 @@ main (int argc, char *argv[])
 
   //Clean-up
   Simulator::Destroy ();
-
-  if (useMlAgent)
-    {
-      m_env->SetFinish ();
-    }
 
   return 0;
 }
@@ -658,35 +645,6 @@ SetPosition (Ptr<MobilityModel> mobilityModel, Vector3D pos)
 }
 
 void
-SetFtmParams ()
-{
-  if (useMlAgent && Simulator::Now ().GetSeconds () >= fuzzTime)
-    {
-      currentFtmReqSent = std::max (currentFtmReqSent, (uint64_t) 1);
-
-      auto env = m_env->EnvSetterCond ();
-      env->ftmSuccessRate = currentFtmReqRec / (double) currentFtmReqSent;
-      m_env->SetCompleted ();
-
-      currentFtmReqSent = 0;
-      currentFtmReqRec = 0;
-
-      auto act = m_env->ActionGetterCond ();
-      ftmParams.SetNumberOfBurstsExponent (act->numberOfBurstsExponent);
-      ftmParams.SetBurstDuration (act->burstDuration);
-      ftmParams.SetMinDeltaFtm (act->minDeltaFtm);
-      ftmParams.SetPartialTsfTimer (act->partialTsfTimer);
-      ftmParams.SetPartialTsfNoPref (act->partialTsfNoPref);
-      ftmParams.SetAsap (act->asap);
-      ftmParams.SetFtmsPerBurst (act->ftmsPerBurst);
-      ftmParams.SetBurstPeriod (act->burstPeriod);
-      m_env->GetCompleted ();
-
-      Simulator::Schedule (Seconds (agentIntervalTime), &SetFtmParams);
-    }
-}
-
-void
 FtmBurst (uint32_t staId, Ptr<WifiNetDevice> device, Mac48Address apAddress)
 {
   Ptr<RegularWifiMac> staMac = device->GetMac ()->GetObject<RegularWifiMac> ();
@@ -698,12 +656,10 @@ FtmBurst (uint32_t staId, Ptr<WifiNetDevice> device, Mac48Address apAddress)
       errorModel->SetNode (device->GetNode ());
 
       session->SetFtmErrorModel (errorModel);
-      session->SetFtmParams(ftmParams);
       session->SetSessionOverCallback (MakeCallback (&FtmSessionOver));
       session->SessionBegin ();
 
       ftmReqSent++;
-      currentFtmReqSent++;
     }
 
   Simulator::Schedule (Seconds (ftmIntervalTime), &FtmBurst, staId, device, apAddress);
@@ -718,6 +674,5 @@ FtmSessionOver (FtmSession session)
     {
       // FTM success
       ftmReqRec++;
-      currentFtmReqRec++;
     }
 }
