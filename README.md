@@ -10,7 +10,7 @@
 	```
 2. Install requirements:
 	```
-	pip install -e .
+	pip install -r requirements.txt
 	```
 
 ### ns-3 network simulator

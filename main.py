@@ -25,7 +25,7 @@ if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
     # global settings
-    args.add_argument('--database', type=str, default='sqlite:///optuna.db')
+    args.add_argument('--database', type=str, default='sqlite:///ftm_ml.db')
     args.add_argument('--seed', type=int, default=100)
     args.add_argument('--ns3_path', type=str, default='')
     args.add_argument('--n_trials', type=int, default=200)
