@@ -7,7 +7,7 @@ import optuna
 
 def objective(trial, ns3_path, scenario, ns3_args):
     ftm_params = {
-        'ftmNumberOfBurstsExponent': trial.suggest_int('ftmNumberOfBurstsExponent', 1, 4),
+        'ftmNumberOfBurstsExponent': trial.suggest_int('ftmNumberOfBurstsExponent', 1, 5),
         'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 11),
         'ftmMinDeltaFtm': trial.suggest_int('ftmMinDeltaFtm', 1, 26),
         'ftmPartialTsfTimer': 2 ** trial.suggest_int('ftmPartialTsfTimer', 1, 16) - 1,
