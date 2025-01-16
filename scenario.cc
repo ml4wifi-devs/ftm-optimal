@@ -75,7 +75,7 @@ main (int argc, char *argv[])
   uint32_t packetSize = 1500;
   uint32_t dataRate = 120;
   uint32_t channelWidth = 20;
-  uint32_t minGI = 3200;
+  uint32_t minGI = 800;
 
   double area = 40.;
   double nodeSpeed = 1.4;
