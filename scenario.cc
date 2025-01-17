@@ -47,7 +47,7 @@ uint64_t ftmReqSent = 0;
 uint64_t ftmReqRec = 0;
 
 double fuzzTime = 5.;
-double ftmIntervalTime = 0.1;
+double ftmIntervalTime = 0.5;
 double agentIntervalTime = 1.0;
 double warmupTime = 10.;
 double simulationTime = 50.;
@@ -73,7 +73,7 @@ main (int argc, char *argv[])
   bool ampdu = true;
   bool enableRtsCts = false;
   uint32_t packetSize = 1500;
-  uint32_t dataRate = 120;
+  uint32_t dataRate = 10;
   uint32_t channelWidth = 20;
   uint32_t minGI = 800;
 

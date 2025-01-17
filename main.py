@@ -51,13 +51,16 @@ if __name__ == '__main__':
     args.add_argument('--database', type=str, default='sqlite:///ftm_ml.db')
     args.add_argument('--seed', type=int, default=100)
     args.add_argument('--ns3_path', type=str, default='')
-    args.add_argument('--n_trials', type=int, default=2000)
+    args.add_argument('--n_trials', type=int, default=1000)
     args.add_argument('--scenario', type=str, default='scenario')
 
     # ns-3 args
-    args.add_argument('--dataRate', type=int, default=120)
-    args.add_argument('--ftmIntervalTime', type=float, default=0.1)
+    args.add_argument('--area', type=float, default=40.0)
+    args.add_argument('--dataRate', type=float, default=10.0)
+    args.add_argument('--distance', type=float, default=0.0)
+    args.add_argument('--ftmIntervalTime', type=float, default=0.5)
     args.add_argument('--fuzzTime', type=float, default=5.0)
+    args.add_argument('--mobilityModel', type=str, default='Distance')
     args.add_argument('--nWifi', type=int, default=1)
     args.add_argument('--simulationTime', type=float, default=50.0)
     args.add_argument('--warmupTime', type=float, default=10.0)
@@ -89,6 +92,6 @@ if __name__ == '__main__':
     study.optimize(
         partial(objective, ns3_path=ns3_path, scenario=scenario, ns3_args=args),
         n_trials=n_trials,
-        n_jobs=-1,
+        n_jobs=16,
         show_progress_bar=True
     )

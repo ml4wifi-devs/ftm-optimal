@@ -31,3 +31,32 @@ The [wifi-ftm-ns3](https://github.com/tkn-tub/wifi-ftm-ns3) extension of the ns-
 	./waf configure -d optimized --enable-examples --enable-tests --disable-werror --disable-python
 	./waf
 	```
+
+## Usage
+
+Run the following command to start the optimization process:
+
+```
+python main.py --nWifi=<N_WIFI> --dataRate=<DATA_RATE> [ARGS]
+```
+
+The process takes a significant amount of time to complete. The results are stored in the SQLite database.
+To run the evaluation process in the background, execute the following command:
+
+```
+nohup python main.py --nWifi=<N_WIFI> --dataRate=<DATA_RATE> [ARGS] &
+```
+
+## Analysis
+
+To install the required packages for the graphical analysis, run the following command:
+
+```
+pip install optuna-dashboard
+```
+
+To start the dashboard, run the following command:
+
+```
+optuna-dashboard sqlite:///<FILENAME>.db
+```
