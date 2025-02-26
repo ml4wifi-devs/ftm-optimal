@@ -29,9 +29,10 @@ void ChangePower (Ptr<Node> staNode, uint8_t powerLevel);
 void GetWarmupFlows (Ptr<FlowMonitor> monitor);
 void InstallTrafficGenerator (Ptr<ns3::Node> fromNode, Ptr<ns3::Node> toNode, uint32_t port,
                               DataRate offeredLoad, uint32_t packetSize, double startTime, double stopTime);
+void LogSuccessRate ();
 void PopulateArpCache ();
 void SetPosition (Ptr<MobilityModel> mobilityModel, Vector3D pos);
-void SetFtmParams ();
+void SetFtmParams (FtmParams ftmParams);
 void FtmBurst (uint32_t staId, Ptr <WifiNetDevice> device, Mac48Address apAddress);
 void FtmSessionOver (FtmSession session);
 
@@ -42,13 +43,15 @@ void FtmSessionOver (FtmSession session);
 #define DEFAULT_TX_POWER 16.0206
 
 std::map<uint32_t, uint64_t> warmupFlows;
+std::ostringstream logOutput;
 
 uint64_t ftmReqSent = 0;
 uint64_t ftmReqRec = 0;
 
 double fuzzTime = 5.;
 double ftmIntervalTime = 0.5;
-double agentIntervalTime = 1.0;
+double ftmParamsSwitch = 0.0;
+double logInterval = 0.5;
 double warmupTime = 10.;
 double simulationTime = 50.;
 bool hiddenCrossScenario = false;
@@ -60,6 +63,7 @@ main (int argc, char *argv[])
 {
   // Initialize default simulation parameters
   std::string csvPath = "results.csv";
+  std::string logPath = "log.csv";
   std::string ftmMapPath = "";
   std::string lossModel = "LogDistance";
   std::string mobilityModel = "Distance";
@@ -92,7 +96,6 @@ main (int argc, char *argv[])
 
   // Parse command line arguments
   CommandLine cmd;
-  cmd.AddValue ("agentIntervalTime", "Interval between agent actions (s)", agentIntervalTime);
   cmd.AddValue ("ampdu", "Use AMPDU (boolean flag)", ampdu);
   cmd.AddValue ("area", "Size of the square in which stations are wandering (m) - only for RWPM mobility type", area);
   cmd.AddValue ("channelWidth", "Channel width (MHz)", channelWidth);
@@ -111,9 +114,12 @@ main (int argc, char *argv[])
   cmd.AddValue ("ftmAsap", "ASAP capable", ftmAsap);
   cmd.AddValue ("ftmFtmsPerBurst", "FTMs per burst", ftmFtmsPerBurst);
   cmd.AddValue ("ftmBurstPeriod", "Burst period", ftmBurstPeriod);
+  cmd.AddValue ("ftmParamsSwitch", "Time to switch FTM parameters (s)", ftmParamsSwitch);
   cmd.AddValue ("fuzzTime", "Maximum fuzz value (s)", fuzzTime);
   cmd.AddValue ("hiddenCrossScenario", "Flag set to enable hidden cross scenario", hiddenCrossScenario);
   cmd.AddValue ("powerInterval", "Interval between power change (s)", powerInterval);
+  cmd.AddValue ("logPath", "Path to log file", logPath);
+  cmd.AddValue ("logInterval", "Interval between log entries (s)", logInterval);
   cmd.AddValue ("lossModel", "Propagation loss model (LogDistance, Nakagami)", lossModel);
   cmd.AddValue ("minGI", "Shortest guard interval (ns)", minGI);
   cmd.AddValue ("mobilityModel", "Mobility model (Distance, RWPM, Hidden)", mobilityModel);
@@ -131,15 +137,25 @@ main (int argc, char *argv[])
       nWifi = hiddenCrossScenario ? 4 * nWifi : 2 * nWifi;
     }
 
-  FtmParams ftmParams;
-  ftmParams.SetNumberOfBurstsExponent(ftmNumberOfBurstsExponent);
-  ftmParams.SetBurstDuration(ftmBurstDuration);
-  ftmParams.SetMinDeltaFtm(ftmMinDeltaFtm);
-  ftmParams.SetPartialTsfTimer(ftmPartialTsfTimer);
-  ftmParams.SetPartialTsfNoPref(ftmPartialTsfNoPref);
-  ftmParams.SetAsap(ftmAsap);
-  ftmParams.SetFtmsPerBurst(ftmFtmsPerBurst);
-  ftmParams.SetBurstPeriod(ftmBurstPeriod);
+  FtmParams defaultFtmParams;
+  defaultFtmParams.SetNumberOfBurstsExponent(1);
+  defaultFtmParams.SetBurstDuration(6);
+  defaultFtmParams.SetMinDeltaFtm(4);
+  defaultFtmParams.SetPartialTsfTimer(0);
+  defaultFtmParams.SetPartialTsfNoPref(true);
+  defaultFtmParams.SetAsap(true);
+  defaultFtmParams.SetFtmsPerBurst(2);
+  defaultFtmParams.SetBurstPeriod(2);
+
+  FtmParams userFtmParams;
+  userFtmParams.SetNumberOfBurstsExponent(ftmNumberOfBurstsExponent);
+  userFtmParams.SetBurstDuration(ftmBurstDuration);
+  userFtmParams.SetMinDeltaFtm(ftmMinDeltaFtm);
+  userFtmParams.SetPartialTsfTimer(ftmPartialTsfTimer);
+  userFtmParams.SetPartialTsfNoPref(ftmPartialTsfNoPref);
+  userFtmParams.SetAsap(ftmAsap);
+  userFtmParams.SetFtmsPerBurst(ftmFtmsPerBurst);
+  userFtmParams.SetBurstPeriod(ftmBurstPeriod);
 
   // Print simulation settings to screen
   std::cout << std::endl
@@ -159,6 +175,8 @@ main (int argc, char *argv[])
             << "- simulation time: " << simulationTime << " s" << std::endl
             << "- warmup time: " << warmupTime << " s" << std::endl
             << "- max fuzz time: " << fuzzTime << " s" << std::endl
+            << "- FTM params switch time: " << ftmParamsSwitch << " s" << std::endl
+            << "- log interval: " << logInterval << " s" << std::endl
             << "- loss model: " << lossModel << std::endl;
 
   if (mobilityModel == "Distance" || mobilityModel == "Hidden")
@@ -176,7 +194,7 @@ main (int argc, char *argv[])
                 << std::endl;
     }
 
-  std::cout << "FTM parameters:" << std::endl
+  std::cout << "FTM user parameters:" << std::endl
             << "- number of bursts exponent: " << (uint32_t) ftmNumberOfBurstsExponent << std::endl
             << "- burst duration: " << (uint32_t) ftmBurstDuration << std::endl
             << "- minimum delta FTM: " << (uint32_t) ftmMinDeltaFtm << std::endl
@@ -195,15 +213,21 @@ main (int argc, char *argv[])
       Config::SetDefault ("ns3::WirelessFtmErrorModel::FtmMap", PointerValue (ftmMap));
     }
 
-  Ptr<FtmParamsHolder> ftmParamsHolder = CreateObject<FtmParamsHolder> ();
-  ftmParamsHolder->SetFtmParams (ftmParams);
-  Config::SetDefault ("ns3::FtmSession::DefaultFtmParams", PointerValue (ftmParamsHolder));
-
   Time::SetResolution (Time::PS);
   Config::SetDefault ("ns3::RegularWifiMac::QosSupported", BooleanValue (true));
   Config::SetDefault ("ns3::RegularWifiMac::FTM_Enabled", BooleanValue (true));
   Config::SetDefault ("ns3::WiredFtmErrorModel::Channel_Bandwidth",
                       StringValue ("Channel_" + std::to_string (channelWidth) + "_MHz"));
+
+  if (ftmParamsSwitch > 0.0)
+    {
+      SetFtmParams (defaultFtmParams);
+      Simulator::Schedule (Seconds (warmupTime + ftmParamsSwitch), &SetFtmParams, userFtmParams);
+    }
+  else
+    {
+      SetFtmParams (userFtmParams);
+    }
 
   // Create AP and stations
   NodeContainer wifiApNode (1);
@@ -447,6 +471,10 @@ main (int argc, char *argv[])
                            Mac48Address::ConvertFrom (apDevice.Get (0)->GetAddress ()));
     }
 
+  // Log FTM success rate
+  logOutput << "time,ftmSuccessRate" << std::endl;
+  Simulator::Schedule (Seconds (warmupTime), &LogSuccessRate);
+
   // Define simulation stop time
   Simulator::Stop (Seconds (warmupTime + simulationTime));
 
@@ -522,6 +550,10 @@ main (int argc, char *argv[])
   outputFile << csvOutput.str ();
   std::cout << std::endl << "Simulation data saved to: " << csvPath << std::endl << std::endl;
 
+  std::ofstream logFile (logPath);
+  logFile << logOutput.str ();
+  std::cout << "Log data saved to: " << logPath << std::endl;
+
   //Clean-up
   Simulator::Destroy ();
 
@@ -588,6 +620,22 @@ InstallTrafficGenerator (Ptr<ns3::Node> fromNode, Ptr<ns3::Node> toNode, uint32_
 }
 
 void
+LogSuccessRate ()
+{
+    static uint64_t lastReqSent = 0;
+    static uint64_t lastReqRec = 0;
+
+    uint64_t reqSent = ftmReqSent - lastReqSent;
+    uint64_t reqRec = ftmReqRec - lastReqRec;
+    double successRate = reqRec / (double) reqSent;
+    lastReqSent = ftmReqSent;
+    lastReqRec = ftmReqRec;
+
+    logOutput << Simulator::Now ().GetSeconds () - warmupTime << "," << successRate << std::endl;
+    Simulator::Schedule (Seconds (logInterval), &LogSuccessRate);
+}
+
+void
 PopulateArpCache ()
 {
   Ptr<ArpCache> arp = CreateObject<ArpCache> ();
@@ -642,6 +690,14 @@ void
 SetPosition (Ptr<MobilityModel> mobilityModel, Vector3D pos)
 {
   mobilityModel->SetPosition (pos);
+}
+
+void
+SetFtmParams (FtmParams ftmParams)
+{
+  Ptr<FtmParamsHolder> ftmParamsHolder = CreateObject<FtmParamsHolder> ();
+  ftmParamsHolder->SetFtmParams (ftmParams);
+  Config::SetDefault ("ns3::FtmSession::DefaultFtmParams", PointerValue (ftmParamsHolder));
 }
 
 void
