@@ -49,7 +49,7 @@ uint64_t ftmReqSent = 0;
 uint64_t ftmReqRec = 0;
 
 double fuzzTime = 5.;
-double ftmIntervalTime = 0.5;
+double ftmIntervalTime = 1.0;
 double ftmParamsSwitch = 0.0;
 double logInterval = 0.5;
 double warmupTime = 10.;
@@ -464,9 +464,14 @@ main (int argc, char *argv[])
   }
 
   // Setup FTM bursts
+  Ptr<UniformRandomVariable> offset = CreateObject<UniformRandomVariable> ();
+  offset->SetAttribute ("Min", DoubleValue (0.));
+  offset->SetAttribute ("Max", DoubleValue (ftmIntervalTime));
+  offset->SetStream (2);
+
   for (uint32_t j = 0; j < wifiStaNodes.GetN (); ++j)
     {
-      Simulator::Schedule (Seconds (warmupTime), &FtmBurst, j,
+      Simulator::Schedule (Seconds (warmupTime) + offset->GetValue (), &FtmBurst, j,
                            staDevice.Get (j)->GetObject<WifiNetDevice>(),
                            Mac48Address::ConvertFrom (apDevice.Get (0)->GetAddress ()));
     }

@@ -22,17 +22,21 @@ def run_until_success(ns3_path, scenario, ns3_args, base_seed=100):
                 return None
 
 
-def objective(trial, ns3_path, scenario, ns3_args):
-    ftm_params = {
-        'ftmNumberOfBurstsExponent': trial.suggest_int('ftmNumberOfBurstsExponent', 1, 5),
-        'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 11),
-        'ftmMinDeltaFtm': trial.suggest_int('ftmMinDeltaFtm', 1, 26),
-        'ftmPartialTsfTimer': 2 ** trial.suggest_int('ftmPartialTsfTimer', 1, 16) - 1,
-        'ftmPartialTsfNoPref': trial.suggest_categorical('ftmPartialTsfNoPref', [True, False]),
-        'ftmAsap': trial.suggest_categorical('ftmAsap', [True, False]),
-        'ftmFtmsPerBurst': trial.suggest_int('ftmFtmsPerBurst', 1, 8),
-        'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 1, 20)
-    }
+def objective(trial, ns3_path, scenario, constrained, ns3_args):
+    if constrained:
+        ftm_params = {
+            'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 6),
+            'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 2, 15),
+            'ftmMinDeltaFtm': trial.suggest_categorical('ftmMinDeltaFtm', [1, 2, 3, 4, 5, 10, 20]),
+        }
+    else:
+        ftm_params = {
+            'ftmAsap': trial.suggest_categorical('ftmAsap', [True, False]),
+            'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 11),
+            'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 1, 15),
+            'ftmFtmsPerBurst': trial.suggest_int('ftmFtmsPerBurst', 1, 10),
+            'ftmMinDeltaFtm': trial.suggest_int('ftmMinDeltaFtm', [1, 2, 3, 4, 5, 10, 20, 40, 80, 160, 320, 640]),
+        }
 
     run_args = {**ns3_args, **ftm_params}
     result = run_until_success(ns3_path, scenario, run_args)
@@ -48,17 +52,18 @@ if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
     # global settings
-    args.add_argument('--database', type=str, default='sqlite:///ftm_ml.db')
+    args.add_argument('--constrained', type=bool, default=False, action='store_true')
+    args.add_argument('--database', type=str, default=None)
     args.add_argument('--seed', type=int, default=100)
     args.add_argument('--ns3_path', type=str, default='')
-    args.add_argument('--n_trials', type=int, default=1000)
+    args.add_argument('--n_trials', type=int, default=200)
     args.add_argument('--scenario', type=str, default='scenario')
 
     # ns-3 args
     args.add_argument('--area', type=float, default=40.0)
     args.add_argument('--dataRate', type=float, default=10.0)
     args.add_argument('--distance', type=float, default=0.0)
-    args.add_argument('--ftmIntervalTime', type=float, default=0.5)
+    args.add_argument('--ftmIntervalTime', type=float, default=1.0)
     args.add_argument('--fuzzTime', type=float, default=5.0)
     args.add_argument('--mobilityModel', type=str, default='Distance')
     args.add_argument('--nWifi', type=int, default=1)
@@ -69,7 +74,15 @@ if __name__ == '__main__':
     args = vars(args)
 
     # read the arguments
-    database = args.pop('database')
+    if args['database']:
+        database = args['database']
+    elif not args['constrained']:
+        database = 'sqlite:///ftm.db'
+    elif args['constrained']:
+        database = 'sqlite:///ftm-constrained.db'
+
+    args.pop('database')
+    constrained = args.pop('constrained')
     seed = args.pop('seed')
     ns3_path = args.pop('ns3_path')
     n_trials = args.pop('n_trials')
@@ -90,7 +103,7 @@ if __name__ == '__main__':
     )
 
     study.optimize(
-        partial(objective, ns3_path=ns3_path, scenario=scenario, ns3_args=args),
+        partial(objective, ns3_path=ns3_path, scenario=scenario, ns3_args=args, constrained=constrained),
         n_trials=n_trials,
         n_jobs=16,
         show_progress_bar=True
