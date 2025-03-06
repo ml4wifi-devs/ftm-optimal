@@ -471,7 +471,7 @@ main (int argc, char *argv[])
 
   for (uint32_t j = 0; j < wifiStaNodes.GetN (); ++j)
     {
-      Simulator::Schedule (Seconds (warmupTime) + offset->GetValue (), &FtmBurst, j,
+      Simulator::Schedule (Seconds (warmupTime + offset->GetValue ()), &FtmBurst, j,
                            staDevice.Get (j)->GetObject<WifiNetDevice>(),
                            Mac48Address::ConvertFrom (apDevice.Get (0)->GetAddress ()));
     }
