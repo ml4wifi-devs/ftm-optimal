@@ -35,16 +35,16 @@ def objective(trial, ns3_path, scenario, constrained, ns3_args):
             'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 11),
             'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 1, 15),
             'ftmFtmsPerBurst': trial.suggest_int('ftmFtmsPerBurst', 1, 10),
-            'ftmMinDeltaFtm': trial.suggest_int('ftmMinDeltaFtm', [1, 2, 3, 4, 5, 10, 20, 40, 80, 160, 320, 640]),
+            'ftmMinDeltaFtm': trial.suggest_categorical('ftmMinDeltaFtm', [1, 2, 3, 4, 5, 10, 20, 40, 80, 160]),
         }
 
     run_args = {**ns3_args, **ftm_params}
     result = run_until_success(ns3_path, scenario, run_args)
 
     try:
-        result = result.split('\n')[-5].split(',')[-1]
+        result = result.split('\n')[-6].split(',')[-1]
         return float(result)
-    except ValueError:
+    except (ValueError, AttributeError) as e:
         return None
 
 
@@ -52,11 +52,11 @@ if __name__ == '__main__':
     args = argparse.ArgumentParser()
 
     # global settings
-    args.add_argument('--constrained', type=bool, default=False, action='store_true')
+    args.add_argument('--constrained', default=False, action='store_true')
     args.add_argument('--database', type=str, default=None)
     args.add_argument('--seed', type=int, default=100)
     args.add_argument('--ns3_path', type=str, default='')
-    args.add_argument('--n_trials', type=int, default=200)
+    args.add_argument('--n_trials', type=int, default=500)
     args.add_argument('--scenario', type=str, default='scenario')
 
     # ns-3 args
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     # create the optuna study
     study = optuna.create_study(
         storage=database,
-        study_name=f'ftm-ml-n{args["nWifi"]}-d{args["dataRate"]}',
+        study_name=f'ftm-ml-n{args["nWifi"]}-d{args["dataRate"]}-mob-{args["mobilityModel"]}-dis{args["distance"]}',
         load_if_exists=True,
         direction='maximize',
         sampler=optuna.samplers.TPESampler(seed=seed)
@@ -105,6 +105,6 @@ if __name__ == '__main__':
     study.optimize(
         partial(objective, ns3_path=ns3_path, scenario=scenario, ns3_args=args, constrained=constrained),
         n_trials=n_trials,
-        n_jobs=16,
+        n_jobs=24,
         show_progress_bar=True
     )
