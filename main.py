@@ -27,7 +27,7 @@ def objective(trial, ns3_path, scenario, constrained, ns3_args):
         ftm_params = {
             'ftmBurstDuration': trial.suggest_int('ftmBurstDuration', 2, 6),
             'ftmBurstPeriod': trial.suggest_int('ftmBurstPeriod', 2, 15),
-            'ftmMinDeltaFtm': trial.suggest_categorical('ftmMinDeltaFtm', [1, 2, 3, 4, 5, 10, 20]),
+            'ftmMinDeltaFtm': trial.suggest_categorical('ftmMinDeltaFtm', [4, 5, 10, 20]),
         }
     else:
         ftm_params = {
