@@ -161,7 +161,7 @@ main (int argc, char *argv[])
   std::cout << std::endl
             << "Simulating an IEEE 802.11ax devices with the following settings:" << std::endl
             << "- frequency band: 5 GHz" << std::endl
-            << "- max data rate: " << dataRate << " Mb/s" << std::endl
+            << "- total data rate: " << dataRate << " Mb/s" << std::endl
             << "- FTM error map: " << !ftmMapPath.empty () << std::endl
             << "- FTM interval: " << ftmIntervalTime << " s" << std::endl
             << "- power delta: " << delta << " dBm" << std::endl
@@ -421,7 +421,7 @@ main (int argc, char *argv[])
                                applicationDataRate, packetSize, 0., warmupTime);
     }
 
-  applicationDataRate = DataRate (dataRate * 1e6);
+  applicationDataRate = DataRate (dataRate * 1e6 / nWifi);
 
   for (uint32_t j = 0; j < wifiStaNodes.GetN (); ++j)
     {
