@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd $NS3_DIR
+
 N_WIFIS=(5 10 20 50)
 DATA_RATES=(0 50 100)
 
