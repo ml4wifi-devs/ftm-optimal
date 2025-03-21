@@ -1,4 +1,7 @@
-# FTM-ML
+# FTM Parameters Optimization
+
+Code for the research paper:
+- Krzysztof Kurczab, Maksymilian Wojnar, Kamil Szczech, and Katarzyna Kosek-Szott. "Improving Robustness of Indoor Positioning by Tuning IEEE 802.11 Fine Timing Measurement Parameters" (under review).
 
 ## Installation
 
