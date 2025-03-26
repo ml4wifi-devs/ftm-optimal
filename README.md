@@ -9,7 +9,7 @@ Code for the research paper:
 
 1. Clone the repository:
 	```
-	git clone https://github.com/mldr-devs/ftm-ml.git
+	git clone https://github.com/ml4wifi-devs/ftm-optimal.git
 	```
 2. Install requirements:
 	```

@@ -96,7 +96,7 @@ if __name__ == '__main__':
     # create the optuna study
     study = optuna.create_study(
         storage=database,
-        study_name=f'ftm-ml-n{args["nWifi"]}-d{args["dataRate"]}-mob-{args["mobilityModel"]}-dis{args["distance"]}',
+        study_name=f'ftm-optimal-n{args["nWifi"]}-d{args["dataRate"]}-mob-{args["mobilityModel"]}-dis{args["distance"]}',
         load_if_exists=True,
         direction='maximize',
         sampler=optuna.samplers.TPESampler(seed=seed)
