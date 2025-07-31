@@ -1,0 +1,300 @@
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 2
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 57460 psec, distance: 861 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 50721 psec, distance: 760 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 48038 psec, distance: 720 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 49686 psec, distance: 745 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 55486 psec, distance: 832 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 50460 psec, distance: 756 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 47619 psec, distance: 714 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: -153628279 psec, distance: -2304424 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 60481 psec, distance: 907 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 49845 psec, distance: 747 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 45812 psec, distance: 687 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 37896 psec, distance: 568 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 40763 psec, distance: 611 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 42270 psec, distance: 634 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 46432 psec, distance: 696 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 45314 psec, distance: 679 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 42851 psec, distance: 642 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 57451 psec, distance: 861 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 52506 psec, distance: 787 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 45210 psec, distance: 678 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 47597 psec, distance: 713 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 49049 psec, distance: 735 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 49556 psec, distance: 743 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 46073 psec, distance: 691 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 44897 psec, distance: 673 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 46424 psec, distance: 696 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 50768 psec, distance: 761 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 48335 psec, distance: 725 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 47889 psec, distance: 718 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 55152 psec, distance: 827 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 43712 psec, distance: 655 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 49661 psec, distance: 744 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 57930 psec, distance: 868 cm
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm

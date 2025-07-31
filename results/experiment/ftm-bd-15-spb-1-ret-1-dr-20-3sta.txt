@@ -1,0 +1,315 @@
+Zapytanie 0 s - 2016-02-11 20:30:46
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 2 s - 2016-02-11 20:30:48
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 5 s - 2016-02-11 20:30:51
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 6 s - 2016-02-11 20:30:52
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 2
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 8 s - 2016-02-11 20:30:54
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 11 s - 2016-02-11 20:30:57
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 43805 psec, distance: 657 cm
+-----
+Zapytanie 14 s - 2016-02-11 20:31:00
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 15 s - 2016-02-11 20:31:01
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 16 s - 2016-02-11 20:31:02
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 17 s - 2016-02-11 20:31:03
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 19 s - 2016-02-11 20:31:05
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 24 s - 2016-02-11 20:31:10
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 27 s - 2016-02-11 20:31:13
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 29 s - 2016-02-11 20:31:15
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 30 s - 2016-02-11 20:31:16
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 31 s - 2016-02-11 20:31:17
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 32 s - 2016-02-11 20:31:18
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 33 s - 2016-02-11 20:31:19
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 35 s - 2016-02-11 20:31:21
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 36 s - 2016-02-11 20:31:22
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 37 s - 2016-02-11 20:31:23
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 39 s - 2016-02-11 20:31:25
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 40 s - 2016-02-11 20:31:26
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 41 s - 2016-02-11 20:31:27
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 42 s - 2016-02-11 20:31:28
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 43 s - 2016-02-11 20:31:29
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 45 s - 2016-02-11 20:31:31
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 46 s - 2016-02-11 20:31:32
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 48 s - 2016-02-11 20:31:34
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 49 s - 2016-02-11 20:31:35
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 50 s - 2016-02-11 20:31:36
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 59264 psec, distance: 888 cm
+-----
+Zapytanie 52 s - 2016-02-11 20:31:38
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 53 s - 2016-02-11 20:31:39
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 55 s - 2016-02-11 20:31:41
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 56 s - 2016-02-11 20:31:42
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 46396 psec, distance: 695 cm
+-----
+Zapytanie 58 s - 2016-02-11 20:31:44
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 43725 psec, distance: 655 cm
+-----
+Zapytanie 59 s - 2016-02-11 20:31:45
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 61 s - 2016-02-11 20:31:47
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 63 s - 2016-02-11 20:31:49
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 65 s - 2016-02-11 20:31:51
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 66 s - 2016-02-11 20:31:52
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 68 s - 2016-02-11 20:31:54
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: -153603705 psec, distance: -2304055 cm
+-----
+Zapytanie 72 s - 2016-02-11 20:31:58
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 74 s - 2016-02-11 20:32:00
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 75 s - 2016-02-11 20:32:01
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 52167 psec, distance: 782 cm
+-----
+Zapytanie 76 s - 2016-02-11 20:32:02
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 78 s - 2016-02-11 20:32:04
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 79 s - 2016-02-11 20:32:05
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 81 s - 2016-02-11 20:32:07
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 82 s - 2016-02-11 20:32:08
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 83 s - 2016-02-11 20:32:09
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 5, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 85 s - 2016-02-11 20:32:11
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 86 s - 2016-02-11 20:32:12
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 44023 psec, distance: 660 cm
+-----
+Zapytanie 87 s - 2016-02-11 20:32:13
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 88 s - 2016-02-11 20:32:14
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 90 s - 2016-02-11 20:32:16
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 91 s - 2016-02-11 20:32:17
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 93 s - 2016-02-11 20:32:19
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 94 s - 2016-02-11 20:32:20
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 95 s - 2016-02-11 20:32:21
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 37238 psec, distance: 558 cm
+-----
+Zapytanie 97 s - 2016-02-11 20:32:23
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 4, rtt: 0 psec, distance: 0 cm
+-----
+Zapytanie 98 s - 2016-02-11 20:32:24
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 44515 psec, distance: 667 cm
+-----
+Zapytanie 99 s - 2016-02-11 20:32:25
+Success to put for target 0:c2:c6:e6:82:f
+phy #0: FTM result! Status: 0
+Target: 00:c2:c6:e6:82:0f, status: 0, rtt: 44193 psec, distance: 662 cm
+-----
